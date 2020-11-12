@@ -18,7 +18,7 @@ class MainView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Tig169"),
+        title: Text("Tig169 TODO"),
         centerTitle: true,
         actions: [
           IconButton(
@@ -145,7 +145,10 @@ class MainView extends StatelessWidget {
 class SecondView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        title: Text("Tig169 TODO"),
+        centerTitle: true,
+      ),
       body: _list(),
     );
   } //builder
