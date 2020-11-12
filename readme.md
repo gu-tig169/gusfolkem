@@ -1,4 +1,3 @@
-#learing git 
-#hello!
+#learing git and gitHub
 
 #change in branch
