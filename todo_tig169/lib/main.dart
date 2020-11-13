@@ -39,7 +39,7 @@ class MainView extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              _list(),
+              _checkboxRow(),
             ],
           ),
         ),
@@ -77,33 +77,41 @@ class MainView extends StatelessWidget {
     }
   } //prints in the debug when pressed.
 
-  Widget _list() {
-    var names = [
-      "Write a book",
-      "Do homework",
-      "Tidy room",
-      "Nap",
-    ];
-    var list = List.generate(names.length, (index) => names[index % 3]);
-
-    return ListView.builder(
-      itemBuilder: (context, index) => _todoItem(list[index]),
-      itemCount: names.length,
+  Widget _checkboxRow() {
+    return Row(
+      children: [
+        Checkbox(
+          value: false,
+          onChanged: (val) {},
+        ),
+        Text('Write a book', style: TextStyle(fontSize: 20)),
+        Container(
+          margin: EdgeInsets.only(left: 16, right: 150),
+        ),
+        Icon(
+          Icons.clear,
+        )
+      ],
     );
-  } //_list returns a builder that build a list from _todoItem.
+  } //_checkboxRow
 
-  Widget _todoItem(text) {
-    bool checkBox = false;
-    return ListTile(
-      leading: Checkbox(value: checkBox, onChanged: (bool newValue) {}),
-      title: Text(text),
-      trailing: IconButton(
-        icon: Icon(Icons.delete),
-        onPressed: () {},
-        hoverColor: Colors.purple,
+  Widget _list() {
+    return ListView(
+      children: [
+        _item("Do homework"),
+      ],
+    );
+  } //_list returns a list with items
+
+  Widget _item(text) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Text(
+        text,
+        style: TextStyle(fontSize: 20),
       ),
     );
-  } //_todoItem
+  } //_item creates items från string argument
 } //close for MainView, the todo list.
 
 class Constants {
