@@ -39,9 +39,7 @@ class MainView extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              _checkBoxRow(),
-              //Container(height: 24),
-              //_list(),
+              _list(),
             ],
           ),
         ),
@@ -77,37 +75,36 @@ class MainView extends StatelessWidget {
     if (choice == Constants.UnDone) {
       print("Undone");
     }
-  }
-
-  Widget _checkBoxRow() {
-    return Row(
-      children: [
-        Checkbox(
-          value: false,
-          onChanged: (val) {},
-        ),
-        Text("Write a great book", style: TextStyle(fontSize: 20)),
-      ],
-    );
-  } //_checkBoxRow
+  } //prints in the debug when pressed.
 
   Widget _list() {
-    var names = ["Pixel", "Lamora"];
-    var list = List.generate(3, (index) => "${names[index % 2]} $index");
+    var names = [
+      "Write a book",
+      "Do homework",
+      "Tidy room",
+      "Nap",
+    ];
+    var list = List.generate(names.length, (index) => names[index % 3]);
 
     return ListView.builder(
-      itemBuilder: (context, index) => _item(list[index]),
-      itemCount: 3,
+      itemBuilder: (context, index) => _todoItem(list[index]),
+      itemCount: names.length,
     );
-  } // _list
+  } //_list returns a builder that build a list from _todoItem.
 
-  Widget _item(text) {
+  Widget _todoItem(text) {
+    bool checkBox = false;
     return ListTile(
+      leading: Checkbox(value: checkBox, onChanged: (bool newValue) {}),
       title: Text(text),
-      subtitle: Text("katt"),
+      trailing: IconButton(
+        icon: Icon(Icons.delete),
+        onPressed: () {},
+        hoverColor: Colors.purple,
+      ),
     );
-  } // _item
-} //MainView
+  } //_todoItem
+} //close for MainView, the todo list.
 
 class Constants {
   static const String All = "all";
@@ -115,7 +112,7 @@ class Constants {
   static const String UnDone = "undone";
 
   static const List<String> choices = <String>[All, Done, UnDone];
-}
+} //constants for the popupmenu
 
 class SecondView extends StatelessWidget {
   Widget build(BuildContext context) {
@@ -132,7 +129,7 @@ class SecondView extends StatelessWidget {
             _addButton(),
           ]),
         ));
-  } //builder
+  } //builder for the second view.
 
   Widget _appBarDecoration() {
     return Container(
@@ -143,7 +140,7 @@ class SecondView extends StatelessWidget {
         ),
       ),
     );
-  } //_appBarDecoration, decorates the appbar with an image
+  } //_appBarDecoration, decorates the appbar with an image.
 
   Widget _inputField() {
     return Container(
@@ -161,14 +158,14 @@ class SecondView extends StatelessWidget {
             ),
           ),
         ));
-  } //_inputField, creates a field where the user can write new things to add to the todo list
+  } //_inputField, creates a field where the user can write new things to add to the todo list.
 
   Widget _addButton() {
     return TextButton(
       onPressed: () {},
       child: _addLabel(),
     );
-  } //_addButton, adds a button that add things to the todo list
+  } //_addButton, adds a button that add things to the todo list.
 
   Widget _addLabel() {
     return Container(
@@ -177,5 +174,5 @@ class SecondView extends StatelessWidget {
         style: TextStyle(fontSize: 16, color: Colors.deepPurple[300]),
       ),
     );
-  } //_addLabel, adds a label with the text "+ ADD"
-} //SecondView
+  } //_addLabel, adds a label with the text "+ ADD".
+} //close for SecondView, where the user can add things to the todo list.
