@@ -17,32 +17,43 @@ class MainView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        flexibleSpace: _appBarDecoration(),
-        title: Text("TIG169 TODO"),
-        centerTitle: true,
-        actions: [
-          IconButton(
-            icon: Icon(Icons.arrow_right_alt_outlined),
-            onPressed: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => SecondView()));
-            },
-          ),
-        ],
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            _checkBoxRow(),
-            //Container(height: 24),
-            //_list(),
+        appBar: AppBar(
+          flexibleSpace: _appBarDecoration(),
+          title: Text("TIG169 TODO"),
+          centerTitle: true,
+          actions: [
+            PopupMenuButton<String>(
+                onSelected: choiceAction,
+                itemBuilder: (BuildContext context) {
+                  return Constants.choices.map((String choice) {
+                    return PopupMenuItem<String>(
+                      value: choice,
+                      child: Text(choice),
+                    );
+                  }).toList();
+                })
           ],
-        ), //Column
-      ), //Center
-    ); //Scaffold
+        ),
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              _checkBoxRow(),
+              //Container(height: 24),
+              //_list(),
+            ],
+          ),
+        ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            Navigator.push(
+                context, MaterialPageRoute(builder: (context) => SecondView()));
+          },
+          tooltip: 'Increment',
+          backgroundColor: Colors.deepPurple[300],
+          child: Icon(Icons.add),
+        ));
   }
 
   Widget _appBarDecoration() {
@@ -55,6 +66,18 @@ class MainView extends StatelessWidget {
       ),
     );
   } //_appBarDecoration, decorates the appbar with an image
+
+  void choiceAction(String choice) {
+    if (choice == Constants.All) {
+      print("All");
+    }
+    if (choice == Constants.Done) {
+      print("Done");
+    }
+    if (choice == Constants.UnDone) {
+      print("Undone");
+    }
+  }
 
   Widget _checkBoxRow() {
     return Row(
@@ -86,6 +109,14 @@ class MainView extends StatelessWidget {
   } // _item
 } //MainView
 
+class Constants {
+  static const String All = "all";
+  static const String Done = "done";
+  static const String UnDone = "undone";
+
+  static const List<String> choices = <String>[All, Done, UnDone];
+}
+
 class SecondView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
@@ -97,7 +128,7 @@ class SecondView extends StatelessWidget {
         body: Center(
           child: Column(children: [
             Container(height: 30),
-            _todoInputField(),
+            _inputField(),
             _addButton(),
           ]),
         ));
@@ -114,7 +145,7 @@ class SecondView extends StatelessWidget {
     );
   } //_appBarDecoration, decorates the appbar with an image
 
-  Widget _todoInputField() {
+  Widget _inputField() {
     return Container(
         margin: EdgeInsets.only(left: 16, right: 16),
         child: Theme(
@@ -130,7 +161,7 @@ class SecondView extends StatelessWidget {
             ),
           ),
         ));
-  } //_todoInputField, creates a field where the user can write new things to add to the todo list
+  } //_inputField, creates a field where the user can write new things to add to the todo list
 
   Widget _addButton() {
     return TextButton(
