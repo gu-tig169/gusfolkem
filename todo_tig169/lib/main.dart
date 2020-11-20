@@ -28,14 +28,17 @@ class TodoList extends StatelessWidget {
 
   Widget _item(item) {
     return ListTile(
-      //leading: LÄGG IN CHECKBOXEN HÄR ,
+      leading: Checkbox(
+        activeColor: Colors.deepPurple,
+        value: true,
+        onChanged: (val) {},
+      ),
       title: Text(
         item.text,
-        style: TextStyle(color: Colors.deepPurple),
+        style: TextStyle(fontSize: 20, color: Colors.deepPurple),
       ),
-      trailing: Icon(
-        Icons.clear,
-      ),
+      trailing: IconButton(
+          icon: Icon(Icons.clear), color: Colors.deepPurple, onPressed: () {}),
     );
   }
 }
@@ -99,32 +102,4 @@ class MainView extends StatelessWidget {
       print("Undone");
     }
   } //prints in the debug when pressed.
-
-  Widget _checkboxRow() {
-    return Row(
-      children: [
-        Checkbox(
-          value: false,
-          onChanged: (val) {},
-        ),
-        Text('Write a book', style: TextStyle(fontSize: 20)),
-        Container(
-          margin: EdgeInsets.only(left: 16, right: 150),
-        ),
-        Icon(
-          Icons.clear,
-        )
-      ],
-    );
-  } //_checkboxRow
-
-  Widget _item(text) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Text(
-        text,
-        style: TextStyle(fontSize: 20),
-      ),
-    );
-  } //_item creates items från string argument
-} //close for MainView, the todo list.
+}
