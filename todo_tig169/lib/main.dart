@@ -30,7 +30,7 @@ class TodoList extends StatelessWidget {
     return ListTile(
       leading: Checkbox(
         activeColor: Colors.deepPurple,
-        value: true,
+        value: false,
         onChanged: (val) {},
       ),
       title: Text(
@@ -72,7 +72,9 @@ class MainView extends StatelessWidget {
         floatingActionButton: FloatingActionButton(
           onPressed: () {
             Navigator.push(
-                context, MaterialPageRoute(builder: (context) => SecondView()));
+                context,
+                MaterialPageRoute(
+                    builder: (context) => SecondView(TodoItem(text: ""))));
           },
           tooltip: 'Increment',
           backgroundColor: Colors.deepPurple[300],

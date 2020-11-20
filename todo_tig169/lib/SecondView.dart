@@ -2,7 +2,34 @@ import 'package:flutter/material.dart';
 
 import './model.dart';
 
-class SecondView extends StatelessWidget {
+class SecondView extends StatefulWidget {
+  final TodoItem item;
+
+  SecondView(this.item);
+
+  @override
+  State<StatefulWidget> createState() {
+    return SecondViewState(item);
+  }
+}
+
+class SecondViewState extends State<SecondView> {
+  String text;
+
+  TextEditingController textEditingController;
+
+  SecondViewState(TodoItem item) {
+    this.text = item.text;
+
+    textEditingController = TextEditingController(text: item.text);
+
+    textEditingController.addListener(() {
+      setState(() {
+        text = textEditingController.text;
+      });
+    });
+  }
+
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
@@ -39,6 +66,7 @@ class SecondView extends StatelessWidget {
             primaryColorDark: Colors.deepPurple,
           ),
           child: TextField(
+            controller: textEditingController,
             decoration: InputDecoration(
               border: OutlineInputBorder(
                   borderSide: BorderSide(color: Colors.deepPurpleAccent)),
