@@ -4,4 +4,4 @@ class TodoItem {
   String text;
 
   TodoItem({this.text});
-} //TodoItem, skapar ett TodoItem.
+} //TodoItem, creates a TodoItem.
