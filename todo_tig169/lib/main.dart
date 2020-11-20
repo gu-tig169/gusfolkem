@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import './SecondView.dart';
+
 void main() {
   runApp(MyApp());
 }
@@ -23,7 +25,16 @@ class TodoList extends StatelessWidget {
   }
 
   Widget _item(item) {
-    return ListTile(title: Text(item.text));
+    return ListTile(
+      //leading: LÄGG IN CHECKBOXEN HÄR ,
+      title: Text(
+        item.text,
+        style: TextStyle(color: Colors.deepPurple),
+      ),
+      trailing: Icon(
+        Icons.clear,
+      ),
+    );
   }
 }
 
@@ -31,7 +42,7 @@ class TodoItem {
   String text;
 
   TodoItem({this.text});
-}
+} //TodoItem, skapar ett TodoItem.
 
 class MainView extends StatelessWidget {
   @override
@@ -129,66 +140,3 @@ class Constants {
 
   static const List<String> choices = <String>[All, Done, UnDone];
 } //constants for the popupmenu
-
-class SecondView extends StatelessWidget {
-  Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          flexibleSpace: _appBarDecoration(),
-          title: Text("TIG169 TODO"),
-          centerTitle: true,
-        ),
-        body: Center(
-          child: Column(children: [
-            Container(height: 30),
-            _inputField(),
-            _addButton(),
-          ]),
-        ));
-  } //builder for the second view.
-
-  Widget _appBarDecoration() {
-    return Container(
-      decoration: BoxDecoration(
-        image: DecorationImage(
-          image: AssetImage("assets/purple_sky.jpg"),
-          fit: BoxFit.cover,
-        ),
-      ),
-    );
-  } //_appBarDecoration, decorates the appbar with an image.
-
-  Widget _inputField() {
-    return Container(
-        margin: EdgeInsets.only(left: 16, right: 16),
-        child: Theme(
-          data: ThemeData(
-            primaryColor: Colors.deepPurpleAccent[100],
-            primaryColorDark: Colors.deepPurple,
-          ),
-          child: TextField(
-            decoration: InputDecoration(
-              border: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.deepPurpleAccent)),
-              hintText: "What are you going to do?",
-            ),
-          ),
-        ));
-  } //_inputField, creates a field where the user can write new things to add to the todo list.
-
-  Widget _addButton() {
-    return TextButton(
-      onPressed: () {},
-      child: _addLabel(),
-    );
-  } //_addButton, adds a button that add things to the todo list.
-
-  Widget _addLabel() {
-    return Container(
-      child: Text(
-        "+ ADD",
-        style: TextStyle(fontSize: 16, color: Colors.deepPurple[300]),
-      ),
-    );
-  } //_addLabel, adds a label with the text "+ ADD".
-} //close for SecondView, where the user can add things to the todo list.
