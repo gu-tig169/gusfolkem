@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import './SecondView.dart';
 import './model.dart';
+import './Constants.dart';
 
 void main() {
   runApp(MyApp());
@@ -127,11 +128,3 @@ class MainView extends StatelessWidget {
     );
   } //_item creates items från string argument
 } //close for MainView, the todo list.
-
-class Constants {
-  static const String All = "all";
-  static const String Done = "done";
-  static const String UnDone = "undone";
-
-  static const List<String> choices = <String>[All, Done, UnDone];
-} //constants for the popupmenu
