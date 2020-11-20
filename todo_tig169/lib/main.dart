@@ -13,6 +13,26 @@ class MyApp extends StatelessWidget {
   }
 }
 
+class TodoList extends StatelessWidget {
+  final List<TodoItem> list;
+
+  TodoList(this.list);
+
+  Widget build(BuildContext context) {
+    return ListView(children: list.map((item) => _item(item)).toList());
+  }
+
+  Widget _item(item) {
+    return ListTile(title: Text(item.text));
+  }
+}
+
+class TodoItem {
+  String text;
+
+  TodoItem({this.text});
+}
+
 class MainView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -34,15 +54,11 @@ class MainView extends StatelessWidget {
                 })
           ],
         ),
-        body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              _checkboxRow(),
-            ],
-          ),
-        ),
+        body: TodoList([
+          TodoItem(text: "Drink tea"),
+          TodoItem(text: "Drink more tea"),
+          TodoItem(text: "Drink a pot of tea")
+        ]),
         floatingActionButton: FloatingActionButton(
           onPressed: () {
             Navigator.push(
@@ -94,14 +110,6 @@ class MainView extends StatelessWidget {
       ],
     );
   } //_checkboxRow
-
-  Widget _list() {
-    return ListView(
-      children: [
-        _item("Do homework"),
-      ],
-    );
-  } //_list returns a list with items
 
   Widget _item(text) {
     return Padding(
