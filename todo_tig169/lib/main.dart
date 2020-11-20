@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import './SecondView.dart';
+import './model.dart';
 
 void main() {
   runApp(MyApp());
@@ -37,12 +38,6 @@ class TodoList extends StatelessWidget {
     );
   }
 }
-
-class TodoItem {
-  String text;
-
-  TodoItem({this.text});
-} //TodoItem, skapar ett TodoItem.
 
 class MainView extends StatelessWidget {
   @override

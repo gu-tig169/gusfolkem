@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import './model.dart';
+
 class SecondView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
