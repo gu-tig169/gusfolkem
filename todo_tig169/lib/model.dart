@@ -11,8 +11,10 @@ class TodoItem {
 
 class MyState extends ChangeNotifier {
   List<TodoItem> _list = [];
+  String _filterBy = "All";
 
   List<TodoItem> get list => _list;
+  String get filterBy => _filterBy;
 
   void addItem(TodoItem item) {
     _list.add(item);
@@ -29,13 +31,8 @@ class MyState extends ChangeNotifier {
     notifyListeners();
   }
 
-  List<TodoItem> filteredList(String choice) {
-    if (choice == "done") {
-      return _list.where((todo) => todo.check == true).toList();
-    } else if (choice == "undone") {
-      return _list.where((todo) => todo.check == false).toList();
-    }
-
-    return _list;
+  void setFilterBy(String filterBy) {
+    this._filterBy = filterBy;
+    notifyListeners();
   }
 } //MyState

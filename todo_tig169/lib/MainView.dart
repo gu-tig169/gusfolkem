@@ -16,19 +16,29 @@ class MainView extends StatelessWidget {
           centerTitle: true,
           actions: [
             PopupMenuButton<String>(
-                onSelected: choiceAction,
-                itemBuilder: (BuildContext context) {
-                  return Constants.choices.map((String choice) {
-                    return PopupMenuItem<String>(
-                      value: choice,
-                      child: Text(choice),
-                    );
-                  }).toList();
-                })
+                onSelected: (value) {
+                  Provider.of<MyState>(context, listen: false)
+                      .setFilterBy(value);
+                },
+                itemBuilder: (context) => [
+                      PopupMenuItem(
+                        child: Text("All"),
+                        value: "All",
+                      ),
+                      PopupMenuItem(
+                        child: Text("Done"),
+                        value: "Done",
+                      ),
+                      PopupMenuItem(
+                        child: Text("Undone"),
+                        value: "Undone",
+                      )
+                    ])
           ],
         ),
         body: Consumer<MyState>(
-          builder: (context, state, child) => TodoList(state.list),
+          builder: (context, state, child) =>
+              TodoList(_filterList(state.list, state.filterBy)),
         ),
         floatingActionButton: FloatingActionButton(
           tooltip: 'Increment',
@@ -57,16 +67,12 @@ class MainView extends StatelessWidget {
     );
   } //_appBarDecoration, decorates the appbar with an image
 
-  void choiceAction(String choice) {
-    if (choice == Constants.All) {
-      print("All");
-    }
-    if (choice == Constants.Done) {
-      print("Done");
-    }
-    if (choice == Constants.UnDone) {
-      print("Undone");
-    }
-  } //prints in the debug when pressed.
-
+  List<TodoItem> _filterList(_list, filterBy) {
+    if (filterBy == "All") return _list;
+    if (filterBy == "Done")
+      return _list.where((item) => item.check == true).toList();
+    if (filterBy == "Undone")
+      return _list.where((item) => item.check == false).toList();
+    return null;
+  }
 } //MainView
