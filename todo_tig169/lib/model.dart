@@ -7,7 +7,7 @@ class TodoItem {
 } //TodoItem, creates a TodoItem.
 
 class MyState extends ChangeNotifier {
-  List<TodoItem> _list;
+  List<TodoItem> _list = [];
 
   List<TodoItem> get list => _list;
 

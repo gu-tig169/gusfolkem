@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import './Constants.dart';
 import './SecondView.dart';
@@ -26,21 +27,20 @@ class MainView extends StatelessWidget {
                 })
           ],
         ),
-        body: TodoList([
-          TodoItem(text: "Drink tea"),
-          TodoItem(text: "Drink more tea"),
-          TodoItem(text: "Drink a pot of tea")
-        ]),
+        body: Consumer<MyState>(
+          builder: (context, state, child) => TodoList(state.list),
+        ),
         floatingActionButton: FloatingActionButton(
+          tooltip: 'Increment',
+          backgroundColor: Colors.deepPurple[300],
+          child: Icon(Icons.add),
           onPressed: () async {
             var newItem = await Navigator.push(
                 context,
                 MaterialPageRoute(
                     builder: (context) => SecondView(TodoItem(text: ""))));
+            Provider.of<MyState>(context, listen: false).addItem(newItem);
           },
-          tooltip: 'Increment',
-          backgroundColor: Colors.deepPurple[300],
-          child: Icon(Icons.add),
         ));
   }
 

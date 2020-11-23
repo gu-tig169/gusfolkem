@@ -79,7 +79,7 @@ class SecondViewState extends State<SecondView> {
   Widget _addButton() {
     return TextButton(
       onPressed: () {
-        Navigator.pop(context, TodoItem(text: "text"));
+        Navigator.pop(context, TodoItem(text: text));
       },
       child: _addLabel(),
     );
