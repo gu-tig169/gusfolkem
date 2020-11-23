@@ -17,8 +17,11 @@ class TodoList extends StatelessWidget {
     return ListTile(
       leading: Checkbox(
         activeColor: Colors.deepPurple,
-        value: false,
-        onChanged: (val) {},
+        value: item.check,
+        onChanged: (bool newValue) {
+          var state = Provider.of<MyState>(context, listen: false);
+          state.setCheck(item, newValue);
+        },
       ),
       title: Text(
         item.text,

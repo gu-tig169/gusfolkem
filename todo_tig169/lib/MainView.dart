@@ -39,7 +39,9 @@ class MainView extends StatelessWidget {
                 context,
                 MaterialPageRoute(
                     builder: (context) => SecondView(TodoItem(text: ""))));
-            Provider.of<MyState>(context, listen: false).addItem(newItem);
+            if (newItem != null) {
+              Provider.of<MyState>(context, listen: false).addItem(newItem);
+            }
           },
         ));
   }
@@ -66,4 +68,5 @@ class MainView extends StatelessWidget {
       print("Undone");
     }
   } //prints in the debug when pressed.
+
 } //MainView

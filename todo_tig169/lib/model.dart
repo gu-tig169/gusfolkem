@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 
 class TodoItem {
   String text;
+  bool check;
 
-  TodoItem({this.text});
+  TodoItem({this.text, this.check = false});
 } //TodoItem, creates a TodoItem.
 
 class MyState extends ChangeNotifier {
@@ -20,4 +21,15 @@ class MyState extends ChangeNotifier {
     _list.remove(item);
     notifyListeners();
   }
+
+  void setCheck(TodoItem item, bool check) {
+    item.check = check;
+    notifyListeners();
+  }
+
+  /*List<TodoItem> filteredList(String choice) {
+    if (choice == "done") {
+      return _list.
+    } */
+
 } //MyState
