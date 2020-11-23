@@ -78,7 +78,9 @@ class SecondViewState extends State<SecondView> {
 
   Widget _addButton() {
     return TextButton(
-      onPressed: () {},
+      onPressed: () {
+        Navigator.pop(context, TodoItem(text: "text"));
+      },
       child: _addLabel(),
     );
   } //_addButton, adds a button that add things to the todo list.
