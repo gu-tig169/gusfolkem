@@ -1,8 +1,8 @@
-import 'package:exercise_ui_02/model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import './MainView.dart';
+import './model.dart';
 
 void main() {
   var state = MyState();

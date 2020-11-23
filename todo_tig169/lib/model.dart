@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import './Constants.dart';
+
 class TodoItem {
   String text;
   bool check;
@@ -27,9 +29,13 @@ class MyState extends ChangeNotifier {
     notifyListeners();
   }
 
-  /*List<TodoItem> filteredList(String choice) {
+  List<TodoItem> filteredList(String choice) {
     if (choice == "done") {
-      return _list.
-    } */
+      return _list.where((todo) => todo.check == true).toList();
+    } else if (choice == "undone") {
+      return _list.where((todo) => todo.check == false).toList();
+    }
 
+    return _list;
+  }
 } //MyState

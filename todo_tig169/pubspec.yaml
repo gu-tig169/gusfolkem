@@ -1,4 +1,4 @@
-name: todo_169
+name: todo_tig169
 description: A new Flutter project.
 
 # The following line prevents the package from being accidentally published to
@@ -30,7 +30,7 @@ dependencies:
   provider: any
   filter_list: ^0.0.5
 
-  dev_dependencies:
+dev_dependencies:
   flutter_test:
     sdk: flutter
 
