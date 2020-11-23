@@ -15,4 +15,9 @@ class MyState extends ChangeNotifier {
     _list.add(item);
     notifyListeners();
   }
-}
+
+  void removeItem(TodoItem item) {
+    _list.remove(item);
+    notifyListeners();
+  }
+} //MyState
