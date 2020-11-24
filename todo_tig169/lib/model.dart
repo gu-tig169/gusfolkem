@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import './Constants.dart';
-
 class TodoItem {
   String text;
   bool check;

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import './Constants.dart';
 import './SecondView.dart';
 import './TodoList.dart';
 import './model.dart';
