@@ -14,7 +14,7 @@ class MainView extends StatelessWidget {
           title: Text("TIG169 TODO"),
           centerTitle: true,
           actions: [
-            PopupMenuButton<String>(
+            PopupMenuButton(
                 onSelected: (value) {
                   Provider.of<MyState>(context, listen: false)
                       .setFilterBy(value);
@@ -72,6 +72,6 @@ class MainView extends StatelessWidget {
       return _list.where((item) => item.check == true).toList();
     if (filterBy == "Undone")
       return _list.where((item) => item.check == false).toList();
-    return null;
+    return _list;
   }
 } //MainView
