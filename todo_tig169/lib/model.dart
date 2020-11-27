@@ -2,18 +2,6 @@ import 'package:flutter/material.dart';
 
 import './APICommunicator.dart';
 
-String checkToString(bool check) {
-  if (check == false) return "false";
-  if (check == true) return "true";
-  return "false";
-}
-
-bool stringToCheck(String check) {
-  if (check == "false") return false;
-  if (check == "true") return true;
-  return false;
-}
-
 class TodoItem {
   String text;
   bool check;
@@ -24,7 +12,7 @@ class TodoItem {
   static Map<String, dynamic> toJson(TodoItem item) {
     return {
       "title": item.text,
-      "done": checkToString(item.check),
+      "done": item.check,
     };
   }
 
@@ -32,7 +20,7 @@ class TodoItem {
     return TodoItem(
       id: json["id"],
       text: json["title"],
-      check: stringToCheck(json["check"]),
+      check: json["done"],
     );
   }
 } //TodoItem, creates a TodoItem.
@@ -43,11 +31,6 @@ class MyState extends ChangeNotifier {
 
   List<TodoItem> get list => _list;
   String get filterBy => _filterBy;
-
-  String _id = "";
-  String get id => _id;
-
-  MyState() {}
 
   Future getList() async {
     List<TodoItem> list = await Api.getItems();
@@ -61,13 +44,15 @@ class MyState extends ChangeNotifier {
   }
 
   void removeItem(TodoItem item) async {
-    await Api.deleteItem(item.id);
+    await Api.deleteItem(item);
     await getList();
   }
 
-  void setCheck(TodoItem item, bool check) {
+  void setCheck(TodoItem item, bool check) async {
     item.check = check;
-    notifyListeners();
+    print(check);
+    await Api.updateCheck(item);
+    await getList();
   }
 
   void setFilterBy(String filterBy) {

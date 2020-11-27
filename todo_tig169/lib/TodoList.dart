@@ -24,7 +24,7 @@ class TodoList extends StatelessWidget {
         },
       ),
       title: Text(
-        item.text,
+        item.text != null ? item.text : "",
         style: TextStyle(fontSize: 20, color: Colors.deepPurple),
       ),
       trailing: IconButton(

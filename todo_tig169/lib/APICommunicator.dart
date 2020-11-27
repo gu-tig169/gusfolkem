@@ -25,7 +25,15 @@ class Api {
     }).toList();
   }
 
-  static Future deleteItem(String itemId) async {
-    await http.delete("$API_URL/todos/$itemId?key=$API_KEY");
+  static Future deleteItem(TodoItem item) async {
+    await http.delete("$API_URL/todos/${item.id}?key=$API_KEY");
+  }
+
+  static Future updateCheck(TodoItem item) async {
+    var json = jsonEncode(TodoItem.toJson(item));
+    String itemId = item.id;
+    print(json);
+    await http.put("$API_URL/todos/$itemId?key=$API_KEY",
+        body: json, headers: {"Content-Type": "application/json"});
   }
 } //class api
