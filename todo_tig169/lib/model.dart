@@ -22,11 +22,15 @@ class TodoItem {
   TodoItem({this.text, this.check = false, this.id});
 
   static Map<String, dynamic> toJson(TodoItem item) {
-    return {"title": item.text, "done": checkToString(item.check)};
+    return {
+      "title": item.text,
+      "done": checkToString(item.check),
+    };
   }
 
   static TodoItem fromJson(Map<String, dynamic> json) {
     return TodoItem(
+      id: json["id"],
       text: json["title"],
       check: stringToCheck(json["check"]),
     );
@@ -56,9 +60,9 @@ class MyState extends ChangeNotifier {
     await getList();
   }
 
-  void removeItem(TodoItem item) {
-    _list.remove(item);
-    notifyListeners();
+  void removeItem(TodoItem item) async {
+    await Api.deleteItem(item.id);
+    await getList();
   }
 
   void setCheck(TodoItem item, bool check) {
