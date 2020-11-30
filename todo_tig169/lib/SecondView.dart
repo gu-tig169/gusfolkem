@@ -78,19 +78,14 @@ class SecondViewState extends State<SecondView> {
 
   Widget _addButton() {
     return TextButton(
-      onPressed: () {
-        Navigator.pop(context, TodoItem(text: text));
-      },
-      child: _addLabel(),
-    );
+        onPressed: () {
+          Navigator.pop(context, TodoItem(text: text));
+        },
+        child: Container(
+          child: Text(
+            "+ ADD",
+            style: TextStyle(fontSize: 16, color: Colors.deepPurple),
+          ),
+        ));
   } //_addButton, adds a button that add things to the todo list.
-
-  Widget _addLabel() {
-    return Container(
-      child: Text(
-        "+ ADD",
-        style: TextStyle(fontSize: 16, color: Colors.deepPurple[300]),
-      ),
-    );
-  }
 }

@@ -40,8 +40,7 @@ class MainView extends StatelessWidget {
               TodoList(_filterList(state.list, state.filterBy)),
         ),
         floatingActionButton: FloatingActionButton(
-          tooltip: 'Increment',
-          backgroundColor: Colors.deepPurple[300],
+          backgroundColor: Colors.deepPurple,
           child: Icon(Icons.add),
           onPressed: () async {
             var newItem = await Navigator.push(
