@@ -82,7 +82,10 @@ class SecondViewState extends State<SecondView> {
     return TextButton(
         onPressed: () {
           if (textEditingController.text.trim().isEmpty) {
-            SnackBar snackBar = SnackBar(content: Text("Write something"));
+            SnackBar snackBar = SnackBar(
+                backgroundColor: Colors.deepPurple,
+                content:
+                    Text("Write something", style: TextStyle(fontSize: 16)));
             _scaffoldkey.currentState.showSnackBar(snackBar);
           } else {
             Navigator.pop(context, TodoItem(text: text));
