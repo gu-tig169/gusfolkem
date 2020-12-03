@@ -9,6 +9,7 @@ class MainView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        backgroundColor: Colors.deepPurple[50],
         appBar: AppBar(
           flexibleSpace: _appBarDecoration(),
           title: Text("TIG169 TODO"),
@@ -16,8 +17,9 @@ class MainView extends StatelessWidget {
           actions: [_popupMenuButton(context)],
         ),
         body: Consumer<MyState>(
-          builder: (context, state, child) =>
-              TodoList(_filterList(state.list, state.filterBy)),
+          builder: (context, state, child) => state.loading
+              ? _loadingIndicator()
+              : TodoList(_filterList(state.list, state.filterBy)),
         ),
         floatingActionButton: _floatingActionButton(context));
   }
@@ -76,6 +78,20 @@ class MainView extends StatelessWidget {
           Provider.of<MyState>(context, listen: false).addItem(newItem);
         }
       },
+    );
+  }
+
+  Widget _loadingIndicator() {
+    return Center(
+      child: SizedBox(
+        width: 60,
+        height: 60,
+        child: CircularProgressIndicator(
+          strokeWidth: 10,
+          backgroundColor: Colors.deepPurple[200],
+          valueColor: new AlwaysStoppedAnimation<Color>(Colors.deepPurple),
+        ),
+      ),
     );
   }
 } //MainView
