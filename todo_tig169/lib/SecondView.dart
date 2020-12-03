@@ -15,6 +15,7 @@ class SecondView extends StatefulWidget {
 
 class SecondViewState extends State<SecondView> {
   String text;
+  final _scaffoldkey = GlobalKey<ScaffoldState>();
 
   TextEditingController textEditingController;
 
@@ -32,6 +33,7 @@ class SecondViewState extends State<SecondView> {
 
   Widget build(BuildContext context) {
     return Scaffold(
+        key: _scaffoldkey,
         appBar: AppBar(
           flexibleSpace: _appBarDecoration(),
           title: Text("TIG169 TODO"),
@@ -78,19 +80,22 @@ class SecondViewState extends State<SecondView> {
 
   Widget _addButton() {
     return TextButton(
-      onPressed: () {
-        Navigator.pop(context, TodoItem(text: text));
-      },
-      child: _addLabel(),
-    );
-  } //_addButton, adds a button that add things to the todo list.
-
-  Widget _addLabel() {
-    return Container(
-      child: Text(
-        "+ ADD",
-        style: TextStyle(fontSize: 16, color: Colors.deepPurple[300]),
-      ),
-    );
-  }
+        onPressed: () {
+          if (textEditingController.text.trim().isEmpty) {
+            SnackBar snackBar = SnackBar(
+                backgroundColor: Colors.deepPurple,
+                content:
+                    Text("Write something", style: TextStyle(fontSize: 16)));
+            _scaffoldkey.currentState.showSnackBar(snackBar);
+          } else {
+            Navigator.pop(context, TodoItem(text: text));
+          }
+        },
+        child: Container(
+          child: Text(
+            "+ ADD",
+            style: TextStyle(fontSize: 16, color: Colors.deepPurple),
+          ),
+        ));
+  } //_addButton
 }

@@ -14,26 +14,36 @@ class TodoList extends StatelessWidget {
   }
 
   Widget _item(context, item) {
-    return ListTile(
-      leading: Checkbox(
-        activeColor: Colors.deepPurple,
-        value: item.check,
-        onChanged: (bool newValue) {
-          var state = Provider.of<MyState>(context, listen: false);
-          state.setCheck(item, newValue);
-        },
-      ),
-      title: Text(
-        item.text,
-        style: TextStyle(fontSize: 20, color: Colors.deepPurple),
-      ),
-      trailing: IconButton(
-          icon: Icon(Icons.clear),
-          color: Colors.deepPurple,
-          onPressed: () {
+    return Card(
+        child: Container(
+      child: ListTile(
+        leading: Checkbox(
+          activeColor: Colors.deepPurple,
+          value: item.check,
+          onChanged: (bool newValue) {
             var state = Provider.of<MyState>(context, listen: false);
-            state.removeItem(item);
-          }),
-    );
+            state.setCheck(item, newValue);
+          },
+        ),
+        title: Text(item.text != null ? item.text : "",
+            style: item.check
+                ? (TextStyle(
+                    fontSize: 20,
+                    color: Colors.black.withOpacity(0.2),
+                    decoration: TextDecoration.lineThrough,
+                  ))
+                : TextStyle(
+                    fontSize: 20,
+                    color: Colors.deepPurple,
+                  )),
+        trailing: IconButton(
+            icon: Icon(Icons.clear),
+            color: Colors.deepPurple,
+            onPressed: () {
+              var state = Provider.of<MyState>(context, listen: false);
+              state.removeItem(item);
+            }),
+      ),
+    ));
   }
 }
