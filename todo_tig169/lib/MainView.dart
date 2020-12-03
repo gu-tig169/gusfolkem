@@ -9,6 +9,7 @@ class MainView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        backgroundColor: Colors.deepPurple[50],
         appBar: AppBar(
           flexibleSpace: _appBarDecoration(),
           title: Text("TIG169 TODO"),
@@ -16,8 +17,9 @@ class MainView extends StatelessWidget {
           actions: [_popupMenuButton(context)],
         ),
         body: Consumer<MyState>(
-          builder: (context, state, child) =>
-              TodoList(_filterList(state.list, state.filterBy)),
+          builder: (context, state, child) => state.loading
+              ? _loadingIndicator()
+              : TodoList(_filterList(state.list, state.filterBy)),
         ),
         floatingActionButton: _floatingActionButton(context));
   }
@@ -35,20 +37,26 @@ class MainView extends StatelessWidget {
 
   Widget _popupMenuButton(context) {
     return PopupMenuButton(
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(Radius.circular(20.0))),
+        color: Colors.deepPurple[50],
         onSelected: (value) {
           Provider.of<MyState>(context, listen: false).setFilterBy(value);
         },
         itemBuilder: (context) => [
               PopupMenuItem(
                 child: Text("All"),
+                textStyle: TextStyle(fontSize: 16, color: Colors.deepPurple),
                 value: "All",
               ),
               PopupMenuItem(
                 child: Text("Done"),
+                textStyle: TextStyle(fontSize: 16, color: Colors.deepPurple),
                 value: "Done",
               ),
               PopupMenuItem(
                 child: Text("Undone"),
+                textStyle: TextStyle(fontSize: 16, color: Colors.deepPurple),
                 value: "Undone",
               )
             ]);
@@ -61,6 +69,20 @@ class MainView extends StatelessWidget {
     if (filterBy == "Undone")
       return _list.where((item) => item.check == false).toList();
     return _list;
+  }
+
+  Widget _loadingIndicator() {
+    return Center(
+      child: SizedBox(
+        width: 60,
+        height: 60,
+        child: CircularProgressIndicator(
+          strokeWidth: 10,
+          backgroundColor: Colors.white,
+          valueColor: new AlwaysStoppedAnimation<Color>(Colors.deepPurple),
+        ),
+      ),
+    );
   }
 
   Widget _floatingActionButton(context) {

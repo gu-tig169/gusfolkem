@@ -33,6 +33,7 @@ class SecondViewState extends State<SecondView> {
 
   Widget build(BuildContext context) {
     return Scaffold(
+        backgroundColor: Colors.deepPurple[50],
         key: _scaffoldkey,
         appBar: AppBar(
           flexibleSpace: _appBarDecoration(),
@@ -61,6 +62,7 @@ class SecondViewState extends State<SecondView> {
 
   Widget _inputField() {
     return Container(
+        color: Colors.white,
         margin: EdgeInsets.only(left: 16, right: 16),
         child: Theme(
           data: ThemeData(
