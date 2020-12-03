@@ -37,20 +37,26 @@ class MainView extends StatelessWidget {
 
   Widget _popupMenuButton(context) {
     return PopupMenuButton(
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(Radius.circular(20.0))),
+        color: Colors.deepPurple[50],
         onSelected: (value) {
           Provider.of<MyState>(context, listen: false).setFilterBy(value);
         },
         itemBuilder: (context) => [
               PopupMenuItem(
                 child: Text("All"),
+                textStyle: TextStyle(fontSize: 16, color: Colors.deepPurple),
                 value: "All",
               ),
               PopupMenuItem(
                 child: Text("Done"),
+                textStyle: TextStyle(fontSize: 16, color: Colors.deepPurple),
                 value: "Done",
               ),
               PopupMenuItem(
                 child: Text("Undone"),
+                textStyle: TextStyle(fontSize: 16, color: Colors.deepPurple),
                 value: "Undone",
               )
             ]);
@@ -63,6 +69,20 @@ class MainView extends StatelessWidget {
     if (filterBy == "Undone")
       return _list.where((item) => item.check == false).toList();
     return _list;
+  }
+
+  Widget _loadingIndicator() {
+    return Center(
+      child: SizedBox(
+        width: 60,
+        height: 60,
+        child: CircularProgressIndicator(
+          strokeWidth: 10,
+          backgroundColor: Colors.white,
+          valueColor: new AlwaysStoppedAnimation<Color>(Colors.deepPurple),
+        ),
+      ),
+    );
   }
 
   Widget _floatingActionButton(context) {
@@ -78,20 +98,6 @@ class MainView extends StatelessWidget {
           Provider.of<MyState>(context, listen: false).addItem(newItem);
         }
       },
-    );
-  }
-
-  Widget _loadingIndicator() {
-    return Center(
-      child: SizedBox(
-        width: 60,
-        height: 60,
-        child: CircularProgressIndicator(
-          strokeWidth: 10,
-          backgroundColor: Colors.deepPurple[200],
-          valueColor: new AlwaysStoppedAnimation<Color>(Colors.deepPurple),
-        ),
-      ),
     );
   }
 } //MainView
